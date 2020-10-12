@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ems
+  name: ems-deployment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ems
+  template:
+    metadata:
+      labels:
+        app: ems
+    spec:
+      containers:
+        - name: ems
+          envFrom:
+            - configMapRef:
+                name: ems-config
+          image: eoepca/ems:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+              ephemeral-storage: "2Gi"
+            limits:
+              memory: "4Gi"
+              cpu: "2"
+              ephemeral-storage: "5Gi"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: ems-config
+              mountPath: /var/etc/ems
+            - name: ems-user-data
+              mountPath: /var/www/html/res
+            - name: ems-processing-services
+              mountPath: /opt/zooservices_user
+      volumes:
+        - name: ems-config
+          persistentVolumeClaim:
+            claimName: ems-config-pv-claim
+        - name: ems-user-data
+          persistentVolumeClaim:
+                claimName: ems-user-data-pv-claim
+        - name: ems-processing-services
+          persistentVolumeClaim:
+                claimName: ems-processing-services-pv-claim
+      restartPolicy: Always
+

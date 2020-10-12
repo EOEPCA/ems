@@ -11,27 +11,15 @@ if [ -z "${CMAKERELEASE}" ]; then
 fi
 
 if [ -z "${LOCAL_IMAGE_NAME}" ]; then
-  LOCAL_IMAGE_NAME='proc-ades:build'
+  LOCAL_IMAGE_NAME='ems:build'
 fi
 
 HERE=$PWD
-cd 3ty/proc-comm-zoo-1.2-alpha
-export addUserFeature="True"
-chmod +x ./scripts/build.sh
-./scripts/build.sh
-if [ $? -ne 0 ]; then
-#  echo "3ty/proc-comm-zoo-1.2-alpha/scripts/build.sh  ${LOCAL_IMAGE_NAME} failed"
-  echo "RDR ERROR"
-  exit 2
-fi
 
-
-cd $HERE
 docker build --rm -t ${LOCAL_IMAGE_NAME} .
 if [ $? -ne 0 ]; then
   echo "docker build --rm -t ${LOCAL_IMAGE_NAME} failed"
   exit 2
 fi
 
-docker tag proc-ades:build eoepca/proc-ades:latest
 

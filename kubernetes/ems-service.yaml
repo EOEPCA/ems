@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ems
+  labels:
+      app: ems
+spec:
+  selector:
+    app: ems
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+  type: NodePort
