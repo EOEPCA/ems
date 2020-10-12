@@ -21,7 +21,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: ems-config
-          image: eoepca/ems:latest
+          image: eoepca/ems:devlatest
           imagePullPolicy: IfNotPresent
           resources:
             requests:
