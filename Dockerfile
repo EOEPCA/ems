@@ -1,4 +1,4 @@
-FROM eoepca/proc-ades:latest
+FROM eoepca/proc-ades:devlatest
 COPY assets/main.cfg /opt/t2service/main.cfg
 
 
