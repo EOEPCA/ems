@@ -50,7 +50,7 @@ export LOCAL_IMAGE_NAME="ems:build"
 #eoepca repository
 export EOEPCA_REPOSITORY='eoepca'
 #eoepca name
-export EOEPCA_IMAGE="proc-ades"
+export EOEPCA_IMAGE="ems"
 #eoepca tag
 export EOEPCA_TAG="${TAG_PREFIX}latest"
 #final image
